@@ -1,5 +1,5 @@
 <template>
-  <div ref="gameViewRef" class="game-view">
+  <div class="game-view">
     <VampireDisplay class="game-view__vampire" />
 
     <div class="game-content">
@@ -37,12 +37,12 @@
       You just saved ${{ savingsAmount.toFixed(2) }}/year!
     </v-snackbar>
 
-    <TallyBar ref="tallyBarRef" />
+    <TallyBar />
   </div>
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, watch } from 'vue'
 import { useGameStore } from '@/stores/gameStore.js'
 import DevicePanel from '@/components/game/DevicePanel.vue'
 import HousePanel from '@/components/game/HousePanel.vue'
@@ -57,10 +57,6 @@ const activeRoomId = ref(null)
 
 const toastOpen = ref(false)
 const savingsAmount = ref(0)
-
-const tallyBarRef = ref(null)
-const gameViewRef = ref(null)
-let ro = null
 
 function openDrawer(roomId) {
   activeRoomId.value = roomId
@@ -77,21 +73,6 @@ watch(() => state.lastSaving, (v) => {
 watch(toastOpen, (open) => {
   if (!open) clearSaving()
 })
-
-onMounted(() => {
-  const el = tallyBarRef.value?.$el
-  if (!el || !gameViewRef.value) return
-  const update = () => {
-    gameViewRef.value.style.setProperty('--tally-h', `${el.offsetHeight}px`)
-  }
-  update()
-  ro = new ResizeObserver(update)
-  ro.observe(el)
-})
-
-onBeforeUnmount(() => {
-  ro?.disconnect()
-})
 </script>
 
 <style scoped>
@@ -106,13 +87,14 @@ onBeforeUnmount(() => {
 }
 
 /* Vampire is pinned to the visible space between the app bar and the
-   top of the sticky tally bar. --tally-h is set by a ResizeObserver. */
+   bottom of the viewport. The opaque sticky tally bar covers its lower
+   edge, so the image never bleeds past the tally. */
 .game-view__vampire {
   position: fixed;
   top: 64px;
   left: 0;
   right: 0;
-  bottom: var(--tally-h, 100px);
+  bottom: 0;
   z-index: 0;
 }
 

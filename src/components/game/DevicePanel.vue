@@ -7,30 +7,6 @@
       <span class="panel-sub">{{ DEVICES.length }} devices</span>
     </div>
 
-    <div class="panel-actions">
-      <v-btn
-        size="small"
-        variant="tonal"
-        color="info"
-        prepend-icon="mdi-home-lightning-bolt"
-        block
-        @click="populateExampleHouse"
-      >
-        Show example house
-      </v-btn>
-      <v-btn
-        size="small"
-        variant="outlined"
-        color="error"
-        prepend-icon="mdi-restart"
-        block
-        :disabled="state.housedDevices.length === 0"
-        @click="resetDialogOpen = true"
-      >
-        Reset all
-      </v-btn>
-    </div>
-
     <div class="panel-scroll">
       <v-expansion-panels variant="accordion" multiple>
         <DeviceCategory
@@ -42,6 +18,30 @@
           @check="onCheck"
         />
       </v-expansion-panels>
+    </div>
+
+    <div class="panel-actions">
+      <v-btn
+        size="large"
+        color="info"
+        :elevation="2"
+        prepend-icon="mdi-home-lightning-bolt"
+        class="panel-action-btn"
+        @click="populateExampleHouse"
+      >
+        Example house
+      </v-btn>
+      <v-btn
+        size="large"
+        color="error"
+        :elevation="2"
+        prepend-icon="mdi-restart"
+        class="panel-action-btn"
+        :disabled="state.housedDevices.length === 0"
+        @click="resetDialogOpen = true"
+      >
+        Reset all
+      </v-btn>
     </div>
 
     <v-fade-transition>
@@ -188,10 +188,17 @@ function confirmReset() {
   display: flex;
   gap: 0.5rem;
   padding: 0.6rem 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
-.panel-actions .v-btn {
-  flex: 1;
+.panel-action-btn {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.panel-action-btn :deep(.v-btn__content) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .panel-scroll {
   flex: 1;
