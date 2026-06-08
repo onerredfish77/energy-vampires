@@ -1,14 +1,14 @@
 <template>
   <div class="game-view">
-    <header class="game-header">
-      <h1 class="game-title">Is There an Energy Vampire in Your House?</h1>
-      <p class="game-instruction">
-        Add devices to your house, then mark which ones stay plugged in when not in use. Watch what happens...
-      </p>
-    </header>
+    <VampireDisplay class="game-view__vampire" />
 
-    <div class="game-stage">
-      <VampireDisplay class="game-stage__vampire" />
+    <div class="game-content">
+      <header class="game-header">
+        <h1 class="game-title">Is There an Energy Vampire in Your House?</h1>
+        <p class="game-instruction">
+          Add devices to your house, then mark which ones stay plugged in when not in use. Watch what happens...
+        </p>
+      </header>
 
       <div class="game-grid">
         <div class="game-col game-col--left">
@@ -77,13 +77,34 @@ watch(toastOpen, (open) => {
 
 <style scoped>
 .game-view {
-  padding: 1rem 1rem 6rem;
+  position: relative;
+  padding: 0;
   min-height: calc(100vh - 64px);
   background: #1A1A2E;
+  isolation: isolate;
 }
+
+/* Vampire fills the entire view (under title, panels, everything except
+   the global app bar and the sticky tally bar). */
+.game-view__vampire {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.game-content {
+  position: relative;
+  z-index: 1;
+  padding: 1rem 1rem 6rem;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 64px);
+}
+
 .game-header {
   text-align: center;
   padding: 0.5rem 1rem 1.25rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 .game-title {
   font-family: 'Playfair Display', Georgia, serif;
@@ -92,70 +113,50 @@ watch(toastOpen, (open) => {
   margin: 0 0 0.5rem;
 }
 .game-instruction {
-  color: #95A5A6;
+  color: #ECF0F1;
   font-size: 0.95rem;
   margin: 0;
   font-style: italic;
+  opacity: 0.9;
 }
 
-/* Stage holds the vampire as a full-width background layer with the
-   panel grid sitting on top. */
-.game-stage {
-  position: relative;
-  height: calc(100vh - 240px);
-  min-height: 540px;
-  border-radius: 14px;
-  overflow: hidden;
-  isolation: isolate;
-}
-.game-stage__vampire {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
 .game-grid {
-  position: relative;
-  z-index: 1;
   display: grid;
   grid-template-columns: 25% 45% 30%;
   gap: 1rem;
   align-items: stretch;
-  height: 100%;
-  padding: 1rem;
+  flex: 1;
+  min-height: 540px;
 }
 .game-col {
   min-width: 0;
-  height: 100%;
 }
 .game-col--right {
-  /* Intentionally empty so the vampire (positioned on the right side of
-     each illustration) is always visible. */
+  /* Empty so the vampire on the right side of the image stays visible. */
   pointer-events: none;
 }
 
 @media (max-width: 960px) {
-  .game-stage {
-    height: auto;
-    min-height: 0;
-  }
-  .game-stage__vampire {
+  .game-view__vampire {
     position: relative;
-    height: 320px;
     inset: auto;
+    height: 280px;
+  }
+  .game-content {
+    min-height: 0;
   }
   .game-grid {
     grid-template-columns: 1fr;
-    height: auto;
-    padding: 0.5rem;
+    min-height: 0;
   }
   .game-col {
-    height: auto;
     min-height: 320px;
   }
   .game-col--right {
     display: none;
   }
 }
+
 .savings-toast :deep(.v-snackbar__wrapper) {
   margin-bottom: 100px;
 }

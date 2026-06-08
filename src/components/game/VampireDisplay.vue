@@ -75,14 +75,14 @@ const currentCaption = computed(
 }
 .vampire-caption {
   position: absolute;
-  bottom: 0;
-  /* Sit in the right ~30% gutter where the character lives. */
+  /* Sit in the right ~30% gutter, above where the sticky tally bar lands. */
   right: 0;
   left: 70%;
-  padding: 1.25rem 1.25rem 1.25rem;
+  bottom: 100px;
+  padding: 1rem 1.25rem;
   text-align: center;
   font-family: 'Playfair Display', Georgia, serif;
-  background: linear-gradient(180deg, transparent 0%, rgba(15, 24, 40, 0.85) 60%, rgba(15, 24, 40, 0.95) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(15, 24, 40, 0.7) 60%, rgba(15, 24, 40, 0.85) 100%);
   z-index: 2;
   pointer-events: none;
 }
