@@ -46,7 +46,7 @@
           size="large"
           :elevation="2"
         >
-          Learn How to Save
+          Ward off your vampire!
           <v-icon icon="mdi-arrow-right" end />
         </v-btn>
       </div>

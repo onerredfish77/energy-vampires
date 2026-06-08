@@ -23,20 +23,19 @@
     <div class="panel-actions">
       <v-btn
         size="large"
-        color="info"
         :elevation="2"
         prepend-icon="mdi-home-lightning-bolt"
-        class="panel-action-btn"
+        class="panel-action-btn panel-action-btn--example"
         @click="populateExampleHouse"
       >
         Example house
       </v-btn>
       <v-btn
         size="large"
+        variant="outlined"
         color="error"
-        :elevation="2"
         prepend-icon="mdi-restart"
-        class="panel-action-btn"
+        class="panel-action-btn panel-action-btn--reset"
         :disabled="state.housedDevices.length === 0"
         @click="resetDialogOpen = true"
       >
@@ -234,6 +233,13 @@ onBeforeUnmount(() => {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.panel-action-btn--example {
+  background-color: #000 !important;
+  color: rgb(var(--v-theme-primary)) !important;
+}
+.panel-action-btn--example :deep(.v-icon) {
+  color: rgb(var(--v-theme-primary)) !important;
 }
 .panel-scroll {
   padding: 0.5rem;

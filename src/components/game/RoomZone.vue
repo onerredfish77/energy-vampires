@@ -3,7 +3,10 @@
     class="room-zone"
     :class="[
       `room-zone--${highestTier || 'empty'}`,
-      { 'room-zone--drag-over': isDragOver }
+      {
+        'room-zone--populated': instances.length > 0,
+        'room-zone--drag-over': isDragOver
+      }
     ]"
     @dragover.prevent="onDragOver"
     @dragleave="onDragLeave"
@@ -148,11 +151,42 @@ function onDrop(e) {
   }
 }
 
+/* Populated rooms always show green dashed border, regardless of tier.
+   Placed after tier rules so it wins on border-color + animation.
+   Tier classes still provide the inset glow for severity signal. */
+.room-zone--populated {
+  border-color: rgba(39, 174, 96, 0.72);
+  animation: room-zone-pulse-populated 2.6s ease-in-out infinite;
+}
+@keyframes room-zone-pulse-populated {
+  0%, 100% {
+    border-color: rgba(39, 174, 96, 0.72);
+    box-shadow: 0 0 0 0 rgba(39, 174, 96, 0);
+  }
+  50% {
+    border-color: rgba(39, 174, 96, 1);
+    box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.18);
+  }
+}
+.room-zone--populated.room-zone--high {
+  box-shadow: inset 0 0 30px rgba(231, 76, 60, 0.15);
+}
+.room-zone--populated.room-zone--moderate {
+  box-shadow: inset 0 0 30px rgba(243, 156, 18, 0.12);
+}
+.room-zone--populated.room-zone--low {
+  box-shadow: inset 0 0 20px rgba(241, 196, 15, 0.08);
+}
+.room-zone--populated:hover {
+  border-color: rgba(39, 174, 96, 1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .room-zone,
   .room-zone--high,
   .room-zone--moderate,
-  .room-zone--low {
+  .room-zone--low,
+  .room-zone--populated {
     animation: none;
   }
 }

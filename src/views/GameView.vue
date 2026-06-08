@@ -130,14 +130,17 @@ watch(toastOpen, (open) => {
   display: grid;
   grid-template-columns: 25% 45% 30%;
   gap: 1rem;
-  align-items: stretch;
+  align-items: start;
   flex: 1;
 }
 .game-col {
   min-width: 0;
   display: flex;
 }
-.game-col > * {
+.game-col--center {
+  align-self: stretch;
+}
+.game-col--center > * {
   flex: 1;
 }
 .game-col--right {
