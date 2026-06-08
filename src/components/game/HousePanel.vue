@@ -100,7 +100,6 @@ function onDrop({ deviceId, roomId }) {
   font-size: 1.2rem;
   margin-bottom: 0.75rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .house-grid {
   flex: 1;

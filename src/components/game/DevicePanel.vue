@@ -1,11 +1,36 @@
 <template>
-  <v-card ref="panelRef" class="device-panel" color="surface" :elevation="2">
+  <v-card class="device-panel" color="surface" :elevation="2">
     <div class="panel-header">
       <v-icon icon="mdi-lightning-bolt" color="primary" />
       <span>Energy Vampires</span>
       <v-spacer />
       <span class="panel-sub">{{ DEVICES.length }} devices</span>
     </div>
+
+    <v-fade-transition>
+      <div
+        v-if="checkedCount > 0"
+        class="bulk-bar"
+      >
+        <span>{{ checkedCount }} selected</span>
+        <v-spacer />
+        <v-btn
+          size="small"
+          variant="text"
+          @click="clearChecked"
+        >
+          Clear
+        </v-btn>
+        <v-btn
+          color="primary"
+          size="small"
+          @click="dialogOpen = true"
+        >
+          Add Selected
+          <v-icon icon="mdi-arrow-right" end />
+        </v-btn>
+      </div>
+    </v-fade-transition>
 
     <div class="panel-scroll">
       <v-expansion-panels variant="accordion" multiple>
@@ -42,32 +67,6 @@
         Reset all
       </v-btn>
     </div>
-
-    <v-fade-transition>
-      <div
-        v-if="checkedCount > 0"
-        class="bulk-bar"
-        :style="bulkBarStyle"
-      >
-        <span>{{ checkedCount }} selected</span>
-        <v-spacer />
-        <v-btn
-          size="small"
-          variant="text"
-          @click="clearChecked"
-        >
-          Clear
-        </v-btn>
-        <v-btn
-          color="primary"
-          size="small"
-          @click="dialogOpen = true"
-        >
-          Add Selected
-          <v-icon icon="mdi-arrow-right" end />
-        </v-btn>
-      </div>
-    </v-fade-transition>
 
     <v-dialog v-model="dialogOpen" max-width="420">
       <v-card color="surface">
@@ -116,7 +115,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { DEVICES, CATEGORIES } from '@/data/devices.js'
 import { useGameStore } from '@/stores/gameStore.js'
 import DeviceCategory from './DeviceCategory.vue'
@@ -127,8 +126,6 @@ const checkedMap = reactive({})
 const dialogOpen = ref(false)
 const resetDialogOpen = ref(false)
 const selectedRoom = ref(null)
-const panelRef = ref(null)
-const bulkBarStyle = ref({ left: '0px', width: '100%' })
 
 const ROOM_OPTIONS = CATEGORIES.map(c => ({ id: c.id, label: `${c.icon}  ${c.label}` }))
 
@@ -166,34 +163,6 @@ function confirmReset() {
   resetGame()
   resetDialogOpen.value = false
 }
-
-let ro = null
-function syncBulkBarGeometry() {
-  const el = panelRef.value?.$el ?? panelRef.value
-  if (!el) return
-  const rect = el.getBoundingClientRect()
-  bulkBarStyle.value = {
-    left: `${rect.left}px`,
-    width: `${rect.width}px`
-  }
-}
-
-onMounted(() => {
-  syncBulkBarGeometry()
-  const el = panelRef.value?.$el ?? panelRef.value
-  if (el) {
-    ro = new ResizeObserver(syncBulkBarGeometry)
-    ro.observe(el)
-  }
-  window.addEventListener('resize', syncBulkBarGeometry)
-  window.addEventListener('scroll', syncBulkBarGeometry, { passive: true })
-})
-
-onBeforeUnmount(() => {
-  ro?.disconnect()
-  window.removeEventListener('resize', syncBulkBarGeometry)
-  window.removeEventListener('scroll', syncBulkBarGeometry)
-})
 </script>
 
 <style scoped>
@@ -245,9 +214,9 @@ onBeforeUnmount(() => {
   padding: 0.5rem;
 }
 .bulk-bar {
-  position: fixed;
-  bottom: 90px;
-  z-index: 2000;
+  position: sticky;
+  top: 57px;
+  z-index: 5;
   display: flex;
   align-items: center;
   gap: 0.5rem;
