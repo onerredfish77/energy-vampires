@@ -7,6 +7,30 @@
       <span class="panel-sub">{{ DEVICES.length }} devices</span>
     </div>
 
+    <div class="panel-actions">
+      <v-btn
+        size="small"
+        variant="tonal"
+        color="info"
+        prepend-icon="mdi-home-lightning-bolt"
+        block
+        @click="populateExampleHouse"
+      >
+        Show example house
+      </v-btn>
+      <v-btn
+        size="small"
+        variant="outlined"
+        color="error"
+        prepend-icon="mdi-restart"
+        block
+        :disabled="state.housedDevices.length === 0"
+        @click="resetDialogOpen = true"
+      >
+        Reset all
+      </v-btn>
+    </div>
+
     <div class="panel-scroll">
       <v-expansion-panels variant="accordion" multiple>
         <DeviceCategory
@@ -69,6 +93,22 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <v-dialog v-model="resetDialogOpen" max-width="420">
+      <v-card color="surface">
+        <v-card-title>Reset the house?</v-card-title>
+        <v-card-text>
+          This will remove all {{ state.housedDevices.length }} device{{ state.housedDevices.length === 1 ? '' : 's' }} from your house. This can’t be undone.
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn variant="text" @click="resetDialogOpen = false">Cancel</v-btn>
+          <v-btn color="error" variant="flat" @click="confirmReset">
+            Reset all
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-card>
 </template>
 
@@ -78,10 +118,11 @@ import { DEVICES, CATEGORIES } from '@/data/devices.js'
 import { useGameStore } from '@/stores/gameStore.js'
 import DeviceCategory from './DeviceCategory.vue'
 
-const { addDevice } = useGameStore()
+const { addDevice, resetGame, populateExampleHouse, state } = useGameStore()
 
 const checkedMap = reactive({})
 const dialogOpen = ref(false)
+const resetDialogOpen = ref(false)
 const selectedRoom = ref(null)
 
 const ROOM_OPTIONS = CATEGORIES.map(c => ({ id: c.id, label: `${c.icon}  ${c.label}` }))
@@ -115,6 +156,11 @@ function confirmBulkAdd() {
   dialogOpen.value = false
   selectedRoom.value = null
 }
+
+function confirmReset() {
+  resetGame()
+  resetDialogOpen.value = false
+}
 </script>
 
 <style scoped>
@@ -137,6 +183,15 @@ function confirmBulkAdd() {
   font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
   color: #95A5A6;
+}
+.panel-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.panel-actions .v-btn {
+  flex: 1;
 }
 .panel-scroll {
   flex: 1;

@@ -16,6 +16,30 @@ const VAMPIRE_THRESHOLDS = [
 
 const DEVICE_BY_ID = new Map(DEVICES.map(d => [d.id, d]))
 
+// Representative ~typical-American-home loadout used by the
+// "Show example house" CTA on the device panel.
+const EXAMPLE_HOUSE = [
+  { deviceId: 'smart-tv-large',             room: 'living-room',  quantity: 1 },
+  { deviceId: 'cable-box-dvr',              room: 'living-room',  quantity: 1 },
+  { deviceId: 'gaming-console',             room: 'living-room',  quantity: 1 },
+  { deviceId: 'soundbar',                   room: 'living-room',  quantity: 1 },
+  { deviceId: 'smart-speaker-standard',     room: 'living-room',  quantity: 1 },
+  { deviceId: 'microwave',                  room: 'kitchen',      quantity: 1 },
+  { deviceId: 'coffee-maker-smart',         room: 'kitchen',      quantity: 1 },
+  { deviceId: 'toaster-oven',               room: 'kitchen',      quantity: 1 },
+  { deviceId: 'phone-charger',              room: 'bedroom',      quantity: 2 },
+  { deviceId: 'clock-radio',                room: 'bedroom',      quantity: 1 },
+  { deviceId: 'desktop-computer',           room: 'home-office',  quantity: 1 },
+  { deviceId: 'wifi-router',                room: 'home-office',  quantity: 1 },
+  { deviceId: 'cable-modem',                room: 'home-office',  quantity: 1 },
+  { deviceId: 'laptop-charger',             room: 'home-office',  quantity: 1 },
+  { deviceId: 'electric-toothbrush-charger',room: 'bathroom',     quantity: 1 },
+  { deviceId: 'washing-machine',            room: 'laundry-room', quantity: 1 },
+  { deviceId: 'garage-door-opener',         room: 'garage',       quantity: 1 },
+  { deviceId: 'smart-thermostat',           room: 'whole-home',   quantity: 1 },
+  { deviceId: 'security-system',            room: 'whole-home',   quantity: 1 }
+]
+
 function hydrateFromStorage() {
   if (typeof window === 'undefined' || !window.localStorage) return null
   try {
@@ -183,6 +207,21 @@ function resetGame() {
   }
 }
 
+function populateExampleHouse() {
+  state.housedDevices.splice(0)
+  state.lastSaving = 0
+  for (const item of EXAMPLE_HOUSE) {
+    if (!lookupDevice(item.deviceId)) continue
+    state.housedDevices.push({
+      instanceId: nextInstanceId(),
+      deviceId: item.deviceId,
+      room: item.room,
+      quantity: item.quantity ?? 1,
+      pluggedIn: true
+    })
+  }
+}
+
 export function useGameStore() {
   return {
     state,
@@ -200,6 +239,7 @@ export function useGameStore() {
     togglePlugStatus,
     clearSaving,
     resetGame,
+    populateExampleHouse,
     lookupDevice
   }
 }
