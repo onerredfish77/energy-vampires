@@ -79,11 +79,12 @@ watch(toastOpen, (open) => {
 .game-view {
   position: relative;
   padding: 0;
-  min-height: calc(100vh - 64px);
+  height: calc(100vh - 64px);
   background: #1A1A2E;
   isolation: isolate;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 /* Vampire is pinned to the visible space between the app bar and the
@@ -105,6 +106,7 @@ watch(toastOpen, (open) => {
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-height: 0;
 }
 
 .game-header {
@@ -129,10 +131,11 @@ watch(toastOpen, (open) => {
 .game-grid {
   display: grid;
   grid-template-columns: 25% 45% 30%;
+  grid-template-rows: 1fr;
   gap: 1rem;
   align-items: stretch;
   flex: 1;
-  min-height: 540px;
+  min-height: 0;
 }
 .game-col {
   min-width: 0;
@@ -143,6 +146,11 @@ watch(toastOpen, (open) => {
 }
 
 @media (max-width: 960px) {
+  .game-view {
+    height: auto;
+    min-height: calc(100vh - 64px);
+    overflow: visible;
+  }
   .game-view__vampire {
     position: relative;
     top: auto;

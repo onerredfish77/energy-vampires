@@ -4,9 +4,9 @@
     color="surface"
     class="tally-bar"
   >
-    <v-row no-gutters align="center" class="tally-row">
-      <!-- Zone 1: Device counts -->
-      <v-col cols="12" sm="3" md="2" class="tally-zone tally-zone--counts">
+    <div class="tally-row">
+      <!-- Devices -->
+      <div class="tally-zone tally-zone--counts">
         <div class="zone-label">Devices</div>
         <div class="counts">
           <span class="count-total">{{ deviceCounts.total }}</span>
@@ -16,32 +16,34 @@
             <v-chip size="x-small" color="info" variant="flat">🟡 {{ deviceCounts.low }}</v-chip>
           </div>
         </div>
-      </v-col>
+      </div>
 
-      <!-- Zone 2: Energy + Money -->
-      <v-col cols="12" sm="6" md="7" class="tally-zone tally-zone--metrics">
-        <div class="metric-row">
-          <span class="metric-icon">⚡</span>
-          <span class="metric-label">Energy Wasted:</span>
+      <!-- Energy Wasted -->
+      <div class="tally-zone tally-zone--metric">
+        <div class="zone-label">Energy Wasted</div>
+        <div class="metric-figures">
           <span class="metric-figure"><span class="figure-sub">{{ animDailyKwh.toFixed(2) }}</span> daily</span>
           <span class="metric-figure"><span class="figure-sub">{{ animWeeklyKwh.toFixed(1) }}</span> weekly</span>
           <span class="metric-figure metric-figure--lead">
             <span class="figure-main">{{ Math.round(animYearlyKwh) }}</span> kWh/yr
           </span>
         </div>
-        <div class="metric-row">
-          <span class="metric-icon">💸</span>
-          <span class="metric-label">Money Lost:</span>
+      </div>
+
+      <!-- Money Lost -->
+      <div class="tally-zone tally-zone--metric">
+        <div class="zone-label">Money Lost</div>
+        <div class="metric-figures">
           <span class="metric-figure">${{ animDailyCost.toFixed(2) }} daily</span>
           <span class="metric-figure">${{ animWeeklyCost.toFixed(2) }} weekly</span>
           <span class="metric-figure metric-figure--lead">
             <span class="figure-main">${{ animYearlyCost.toFixed(0) }}</span>/yr
           </span>
         </div>
-      </v-col>
+      </div>
 
-      <!-- Zone 3: CTA -->
-      <v-col cols="12" sm="3" md="3" class="tally-zone tally-zone--cta">
+      <!-- CTA -->
+      <div class="tally-zone tally-zone--cta">
         <v-btn
           to="/tips"
           color="primary"
@@ -51,8 +53,8 @@
           Learn How to Save
           <v-icon icon="mdi-arrow-right" end />
         </v-btn>
-      </v-col>
-    </v-row>
+      </div>
+    </div>
   </v-footer>
 </template>
 
@@ -101,28 +103,35 @@ watch(() => tallyYearly.value.cost, v => animate(animYearlyCost, v))
   bottom: 0;
   z-index: 5;
   border-top: 2px solid rgba(231, 76, 60, 0.3);
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem !important;
+  min-height: 0 !important;
   background: linear-gradient(180deg, #16213E 0%, #0F1828 100%) !important;
 }
 .tally-row {
   width: 100%;
+  display: flex;
   flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
 .tally-zone {
-  padding: 0.25rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 .zone-label {
   font-size: 0.7rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: #95A5A6;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
 }
 .counts {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .count-total {
   font-family: 'Protest Riot', Impact, Georgia, serif;
@@ -134,36 +143,22 @@ watch(() => tallyYearly.value.cost, v => animate(animYearlyCost, v))
 .count-tiers {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.25rem;
 }
-.tally-zone--metrics {
-  border-left: 1px solid rgba(255, 255, 255, 0.06);
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-  padding-block: 0.4rem;
-}
-.metric-row {
+.metric-figures {
   display: flex;
   align-items: baseline;
   gap: 1rem;
+  flex-wrap: nowrap;
   color: #ECF0F1;
-  flex-wrap: wrap;
-  margin: 0.25rem 0;
-}
-.metric-icon {
-  font-size: 1.5rem;
-}
-.metric-label {
-  font-weight: 700;
-  color: #ECF0F1;
-  font-size: 1rem;
-  letter-spacing: 0.3px;
 }
 .metric-figure {
   font-variant-numeric: tabular-nums;
   font-size: 1.05rem;
   color: #ECF0F1;
   font-weight: 500;
+  white-space: nowrap;
 }
 .metric-figure--lead {
   color: #E74C3C;
@@ -184,21 +179,14 @@ watch(() => tallyYearly.value.cost, v => animate(animYearlyCost, v))
   font-weight: 600;
 }
 .tally-zone--cta {
-  display: flex;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .tally-row {
     flex-wrap: wrap;
-  }
-  .metric-figure--lead {
-    margin-left: 0;
-  }
-  .tally-zone--cta {
-    justify-content: center;
-    margin-top: 0.5rem;
+    gap: 1rem;
   }
 }
 </style>
