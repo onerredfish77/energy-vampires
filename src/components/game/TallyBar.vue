@@ -7,7 +7,7 @@
   >
     <v-row no-gutters align="center" class="tally-row">
       <!-- Zone 1: Device counts -->
-      <v-col cols="12" sm="3" class="tally-zone tally-zone--counts">
+      <v-col cols="12" sm="3" md="2" class="tally-zone tally-zone--counts">
         <div class="zone-label">Devices</div>
         <div class="counts">
           <span class="count-total">{{ deviceCounts.total }}</span>
@@ -20,7 +20,7 @@
       </v-col>
 
       <!-- Zone 2: Energy + Money -->
-      <v-col cols="12" sm="6" class="tally-zone tally-zone--metrics">
+      <v-col cols="12" sm="6" md="7" class="tally-zone tally-zone--metrics">
         <div class="metric-row">
           <span class="metric-icon">⚡</span>
           <span class="metric-label">Energy Wasted:</span>
@@ -42,7 +42,7 @@
       </v-col>
 
       <!-- Zone 3: CTA -->
-      <v-col cols="12" sm="3" class="tally-zone tally-zone--cta">
+      <v-col cols="12" sm="3" md="3" class="tally-zone tally-zone--cta">
         <v-btn
           to="/tips"
           color="primary"
@@ -104,7 +104,7 @@ watch(() => tallyYearly.value.cost, v => animate(animYearlyCost, v))
 }
 .tally-row {
   width: 100%;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 .tally-zone {
   padding: 0.25rem 0.75rem;
@@ -120,63 +120,81 @@ watch(() => tallyYearly.value.cost, v => animate(animYearlyCost, v))
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  flex-wrap: wrap;
 }
 .count-total {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: #ECF0F1;
   line-height: 1;
 }
 .count-tiers {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.25rem;
 }
 .tally-zone--metrics {
   border-left: 1px solid rgba(255, 255, 255, 0.06);
   border-right: 1px solid rgba(255, 255, 255, 0.06);
+  padding-block: 0.4rem;
 }
 .metric-row {
   display: flex;
   align-items: baseline;
-  gap: 0.75rem;
-  font-size: 0.8rem;
-  color: #95A5A6;
+  gap: 1rem;
+  color: #ECF0F1;
   flex-wrap: wrap;
-  margin: 0.15rem 0;
+  margin: 0.25rem 0;
 }
 .metric-icon {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
 }
 .metric-label {
-  font-weight: 600;
+  font-weight: 700;
   color: #ECF0F1;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
 }
 .metric-figure {
   font-variant-numeric: tabular-nums;
+  font-size: 1.05rem;
+  color: #ECF0F1;
+  font-weight: 500;
 }
 .metric-figure--lead {
   color: #E74C3C;
-  font-weight: 600;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
 }
 .figure-main {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: clamp(1.75rem, 2.6vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.5px;
 }
 .figure-sub {
   color: #ECF0F1;
+  font-weight: 600;
 }
 .tally-zone--cta {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-left: auto;
 }
 
 @media (max-width: 600px) {
+  .metric-figure--lead {
+    margin-left: 0;
+  }
   .tally-zone--cta {
     justify-content: center;
+    margin-left: 0;
     margin-top: 0.5rem;
   }
 }
