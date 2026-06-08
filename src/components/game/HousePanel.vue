@@ -94,7 +94,7 @@ function onDrop({ deviceId, roomId }) {
 .house-title {
   display: flex;
   align-items: center;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-size: 1.2rem;
   margin-bottom: 0.75rem;
   padding-bottom: 0.5rem;

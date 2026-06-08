@@ -82,23 +82,28 @@ watch(toastOpen, (open) => {
   min-height: calc(100vh - 64px);
   background: #1A1A2E;
   isolation: isolate;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Vampire fills the entire view (under title, panels, everything except
-   the global app bar and the sticky tally bar). */
+/* Vampire is pinned to the visible space between the app bar and the
+   bottom of the viewport. The sticky tally bar sits over its lower edge. */
 .game-view__vampire {
-  position: absolute;
-  inset: 0;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 0;
 }
 
 .game-content {
   position: relative;
   z-index: 1;
-  padding: 1rem 1rem 6rem;
+  padding: 1rem 1rem 1rem;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 64px);
+  flex: 1;
 }
 
 .game-header {
@@ -107,7 +112,7 @@ watch(toastOpen, (open) => {
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 .game-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   color: #ECF0F1;
   margin: 0 0 0.5rem;
@@ -139,11 +144,11 @@ watch(toastOpen, (open) => {
 @media (max-width: 960px) {
   .game-view__vampire {
     position: relative;
-    inset: auto;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
     height: 280px;
-  }
-  .game-content {
-    min-height: 0;
   }
   .game-grid {
     grid-template-columns: 1fr;

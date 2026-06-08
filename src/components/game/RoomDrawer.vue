@@ -133,7 +133,7 @@ function annualCost(inst) {
   gap: 0.5rem;
   padding: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
 }
 .drawer-icon {
   font-size: 1.4rem;

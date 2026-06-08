@@ -1,6 +1,5 @@
 <template>
   <v-footer
-    app
     :elevation="8"
     color="surface"
     class="tally-bar"
@@ -98,13 +97,16 @@ watch(() => tallyYearly.value.cost, v => animate(animYearlyCost, v))
 
 <style scoped>
 .tally-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
   border-top: 2px solid rgba(231, 76, 60, 0.3);
   padding: 0.75rem 1rem;
   background: linear-gradient(180deg, #16213E 0%, #0F1828 100%) !important;
 }
 .tally-row {
   width: 100%;
-  gap: 0.5rem;
+  flex-wrap: nowrap;
 }
 .tally-zone {
   padding: 0.25rem 0.75rem;
@@ -123,7 +125,7 @@ watch(() => tallyYearly.value.cost, v => animate(animYearlyCost, v))
   flex-wrap: wrap;
 }
 .count-total {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-size: 1.75rem;
   font-weight: 700;
   color: #ECF0F1;
@@ -171,7 +173,7 @@ watch(() => tallyYearly.value.cost, v => animate(animYearlyCost, v))
   gap: 0.4rem;
 }
 .figure-main {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-size: clamp(1.75rem, 2.6vw, 2.5rem);
   font-weight: 900;
   line-height: 1;
@@ -185,16 +187,17 @@ watch(() => tallyYearly.value.cost, v => animate(animYearlyCost, v))
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-left: auto;
 }
 
 @media (max-width: 600px) {
+  .tally-row {
+    flex-wrap: wrap;
+  }
   .metric-figure--lead {
     margin-left: 0;
   }
   .tally-zone--cta {
     justify-content: center;
-    margin-left: 0;
     margin-top: 0.5rem;
   }
 }

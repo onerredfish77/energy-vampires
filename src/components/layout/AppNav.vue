@@ -51,7 +51,7 @@ const links = [
 .brand-title {
   display: flex;
   align-items: center;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-weight: 700;
   font-size: 1.4rem;
 }

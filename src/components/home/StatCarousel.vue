@@ -142,7 +142,7 @@ onBeforeUnmount(() => {
   gap: 1.5rem;
 }
 .stat-headline {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-weight: 900;
   font-size: clamp(4rem, 14vw, 11rem);
   line-height: 1;

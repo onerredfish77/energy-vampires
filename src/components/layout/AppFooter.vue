@@ -42,7 +42,7 @@ const links = [
   padding: 1.5rem 0;
 }
 .footer-brand {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
 }

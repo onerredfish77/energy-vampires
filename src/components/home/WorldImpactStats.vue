@@ -58,7 +58,7 @@ const items = [
   background: linear-gradient(180deg, #1A1A2E 0%, #16213E 100%);
 }
 .section-header {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-weight: 700;
   font-size: clamp(2rem, 4vw, 3rem);
   text-align: center;
@@ -82,7 +82,7 @@ const items = [
   line-height: 1;
 }
 .impact-stat {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-weight: 700;
   font-size: 1.5rem;
   color: #E74C3C;

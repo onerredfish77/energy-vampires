@@ -245,7 +245,7 @@ const habits = [
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .tips-headline {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-weight: 900;
   font-size: clamp(2.25rem, 5vw, 3.75rem);
   color: #ECF0F1;
@@ -265,7 +265,7 @@ const habits = [
   background: rgba(15, 52, 96, 0.15);
 }
 .section-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-weight: 700;
   font-size: clamp(1.75rem, 3vw, 2.25rem);
   color: #ECF0F1;
@@ -288,7 +288,7 @@ const habits = [
   margin-bottom: 0.5rem;
 }
 .habit-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-size: 1.15rem;
   font-weight: 700;
   white-space: normal;
@@ -305,7 +305,7 @@ const habits = [
   border-top: 1px solid rgba(231, 76, 60, 0.2);
 }
 .cta-headline {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-weight: 700;
   font-size: clamp(1.75rem, 3vw, 2.25rem);
   color: #ECF0F1;

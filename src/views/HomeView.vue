@@ -58,7 +58,7 @@ import WorldImpactStats from '@/components/home/WorldImpactStats.vue'
   margin-bottom: 3rem;
 }
 .cta-headline {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-weight: 700;
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   color: #ECF0F1;

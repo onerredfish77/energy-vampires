@@ -111,7 +111,7 @@ The app is a Vite + Vue 3 single-page application. The three "pages" are Vue Rou
 
 | Role | Font | Style |
 |---|---|---|
-| Headlines | Playfair Display | Bold / Black weight — loaded from Google Fonts |
+| Headlines | Protest Riot | Single weight — loaded from Google Fonts |
 | Body & UI | Inter | Regular / Medium / SemiBold — loaded from Google Fonts |
 
 ### 4.3 Tier Badge System

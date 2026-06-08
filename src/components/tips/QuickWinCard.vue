@@ -42,7 +42,7 @@ defineProps({
   margin-bottom: 0.5rem;
 }
 .qw-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-weight: 700;
   font-size: 1.15rem;
   white-space: normal;

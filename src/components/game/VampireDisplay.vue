@@ -81,7 +81,7 @@ const currentCaption = computed(
   bottom: 100px;
   padding: 1rem 1.25rem;
   text-align: center;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   background: linear-gradient(180deg, transparent 0%, rgba(15, 24, 40, 0.7) 60%, rgba(15, 24, 40, 0.85) 100%);
   z-index: 2;
   pointer-events: none;

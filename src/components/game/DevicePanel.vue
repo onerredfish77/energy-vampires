@@ -129,7 +129,7 @@ function confirmBulkAdd() {
   align-items: center;
   gap: 0.5rem;
   padding: 1rem;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Protest Riot', Impact, Georgia, serif;
   font-size: 1.2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }

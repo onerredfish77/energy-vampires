@@ -109,7 +109,7 @@ The custom Volt Watch theme is defined once in `vuetify.js` and applied globally
 | On-surface text | `on-surface` | `#ECF0F1` |
 
 **Typography:**
-- Headlines: Playfair Display (loaded via Google Fonts, mapped to Vuetify's `display` and `headline` type roles)
+- Headlines: Protest Riot (loaded via Google Fonts, mapped to Vuetify's `display` and `headline` type roles)
 - Body / UI: Inter (mapped to Vuetify's `body` and `button` type roles)
 
 **Material Design Elevation:**
@@ -162,7 +162,7 @@ Initialize a new Vite project with the Vue 3 template. Install Vuetify 3, Vue Ro
 
 ### STEP 2 — Configure Vuetify
 
-Create the Vuetify plugin file. Define the custom Volt Watch dark theme using the color tokens defined in the theme table above. Set the default theme to the custom theme. Register the Google Fonts import for Playfair Display and Inter. Register the Vuetify plugin in `main.js`.
+Create the Vuetify plugin file. Define the custom Volt Watch dark theme using the color tokens defined in the theme table above. Set the default theme to the custom theme. Register the Google Fonts import for Protest Riot and Inter. Register the Vuetify plugin in `main.js`.
 
 ---
 
