@@ -7,15 +7,17 @@
       </p>
     </header>
 
-    <div class="game-grid">
-      <div class="game-col game-col--left">
-        <DevicePanel />
-      </div>
-      <div class="game-col game-col--center">
-        <HousePanel @open-room="openDrawer" />
-      </div>
-      <div class="game-col game-col--right">
-        <VampireDisplay />
+    <div class="game-stage">
+      <VampireDisplay class="game-stage__vampire" />
+
+      <div class="game-grid">
+        <div class="game-col game-col--left">
+          <DevicePanel />
+        </div>
+        <div class="game-col game-col--center">
+          <HousePanel @open-room="openDrawer" />
+        </div>
+        <div class="game-col game-col--right" aria-hidden="true" />
       </div>
     </div>
 
@@ -95,29 +97,63 @@ watch(toastOpen, (open) => {
   margin: 0;
   font-style: italic;
 }
+
+/* Stage holds the vampire as a full-width background layer with the
+   panel grid sitting on top. */
+.game-stage {
+  position: relative;
+  height: calc(100vh - 240px);
+  min-height: 540px;
+  border-radius: 14px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.game-stage__vampire {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
 .game-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 25% 45% 30%;
   gap: 1rem;
   align-items: stretch;
-  height: calc(100vh - 240px);
-  min-height: 540px;
+  height: 100%;
+  padding: 1rem;
 }
 .game-col {
   min-width: 0;
   height: 100%;
 }
 .game-col--right {
-  position: relative;
+  /* Intentionally empty so the vampire (positioned on the right side of
+     each illustration) is always visible. */
+  pointer-events: none;
 }
+
 @media (max-width: 960px) {
+  .game-stage {
+    height: auto;
+    min-height: 0;
+  }
+  .game-stage__vampire {
+    position: relative;
+    height: 320px;
+    inset: auto;
+  }
   .game-grid {
     grid-template-columns: 1fr;
     height: auto;
+    padding: 0.5rem;
   }
   .game-col {
     height: auto;
     min-height: 320px;
+  }
+  .game-col--right {
+    display: none;
   }
 }
 .savings-toast :deep(.v-snackbar__wrapper) {

@@ -50,23 +50,14 @@ const currentCaption = computed(
 <style scoped>
 .vampire-display {
   position: relative;
+  width: 100%;
   height: 100%;
-  min-height: 480px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 1rem 5rem;
-  border-radius: 12px;
   overflow: hidden;
   background: #0F1828;
 }
 .vampire-stage {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   opacity: 0;
   transition: opacity 800ms ease-in-out;
   pointer-events: none;
@@ -78,31 +69,33 @@ const currentCaption = computed(
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center right;
   user-select: none;
   -webkit-user-drag: none;
 }
 .vampire-caption {
   position: absolute;
   bottom: 0;
-  left: 0;
+  /* Sit in the right ~30% gutter where the character lives. */
   right: 0;
-  padding: 1.5rem 1rem 1rem;
+  left: 70%;
+  padding: 1.25rem 1.25rem 1.25rem;
   text-align: center;
   font-family: 'Playfair Display', Georgia, serif;
   background: linear-gradient(180deg, transparent 0%, rgba(15, 24, 40, 0.85) 60%, rgba(15, 24, 40, 0.95) 100%);
   z-index: 2;
+  pointer-events: none;
 }
 .vampire-caption p {
-  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
   color: #ECF0F1;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.4rem;
   font-style: italic;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
 }
 .vampire-watts {
   font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   color: #95A5A6;
   letter-spacing: 1px;
 }
@@ -113,5 +106,11 @@ const currentCaption = computed(
 .caption-fade-enter-from,
 .caption-fade-leave-to {
   opacity: 0;
+}
+
+@media (max-width: 960px) {
+  .vampire-caption {
+    left: 0;
+  }
 }
 </style>
