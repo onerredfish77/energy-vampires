@@ -93,9 +93,9 @@ The app is a Vite + Vue 3 single-page application. The three "pages" are Vue Rou
 
 | Role | Color | Hex |
 |---|---|---|
-| Primary Background | Deep charcoal | `#1A1A2E` |
-| Secondary Background | Dark navy | `#16213E` |
-| Panel Background | Deep blue | `#0F3460` |
+| Primary Background | Near-black | `#0D0D0D` |
+| Secondary Background | Dark grey | `#1F1F1F` |
+| Panel Background | Medium dark grey | `#2A2A2A` |
 | Accent / CTA | Crimson red | `#E74C3C` |
 | Accent Hover | Darker red | `#C0392B` |
 | Success / Savings | Emerald green | `#27AE60` |

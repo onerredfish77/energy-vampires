@@ -70,36 +70,91 @@ function onDrop(e) {
   position: relative;
   min-height: 110px;
   padding: 0.75rem;
-  border: 2px dashed rgba(255, 255, 255, 0.12);
+  border: 2px dashed rgba(255, 255, 255, 0.72);
   border-radius: 10px;
-  background: rgba(15, 52, 96, 0.25);
+  background: rgba(42, 42, 42, 0.25);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  animation: room-zone-pulse 2.6s ease-in-out infinite;
+}
+@keyframes room-zone-pulse {
+  0%, 100% {
+    border-color: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+  50% {
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+  }
 }
 .room-zone:hover {
-  background: rgba(15, 52, 96, 0.45);
-  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(42, 42, 42, 0.45);
+  border-color: rgba(255, 255, 255, 0.95);
+  animation-play-state: paused;
 }
 .room-zone--drag-over {
   border-style: solid;
   border-color: #E74C3C;
   background: rgba(231, 76, 60, 0.12);
   transform: scale(1.02);
+  animation: none;
 }
 .room-zone--high {
-  border-color: rgba(231, 76, 60, 0.6);
+  border-color: rgba(231, 76, 60, 0.72);
   box-shadow: inset 0 0 30px rgba(231, 76, 60, 0.15);
+  animation: room-zone-pulse-high 2.6s ease-in-out infinite;
+}
+@keyframes room-zone-pulse-high {
+  0%, 100% {
+    border-color: rgba(231, 76, 60, 0.72);
+    box-shadow: inset 0 0 30px rgba(231, 76, 60, 0.15), 0 0 0 0 rgba(231, 76, 60, 0);
+  }
+  50% {
+    border-color: rgba(231, 76, 60, 1);
+    box-shadow: inset 0 0 30px rgba(231, 76, 60, 0.22), 0 0 0 3px rgba(231, 76, 60, 0.18);
+  }
 }
 .room-zone--moderate {
-  border-color: rgba(243, 156, 18, 0.6);
+  border-color: rgba(243, 156, 18, 0.72);
   box-shadow: inset 0 0 30px rgba(243, 156, 18, 0.12);
+  animation: room-zone-pulse-moderate 2.6s ease-in-out infinite;
+}
+@keyframes room-zone-pulse-moderate {
+  0%, 100% {
+    border-color: rgba(243, 156, 18, 0.72);
+    box-shadow: inset 0 0 30px rgba(243, 156, 18, 0.12), 0 0 0 0 rgba(243, 156, 18, 0);
+  }
+  50% {
+    border-color: rgba(243, 156, 18, 1);
+    box-shadow: inset 0 0 30px rgba(243, 156, 18, 0.18), 0 0 0 3px rgba(243, 156, 18, 0.18);
+  }
 }
 .room-zone--low {
-  border-color: rgba(241, 196, 15, 0.5);
+  border-color: rgba(241, 196, 15, 0.72);
   box-shadow: inset 0 0 20px rgba(241, 196, 15, 0.08);
+  animation: room-zone-pulse-low 2.6s ease-in-out infinite;
+}
+@keyframes room-zone-pulse-low {
+  0%, 100% {
+    border-color: rgba(241, 196, 15, 0.72);
+    box-shadow: inset 0 0 20px rgba(241, 196, 15, 0.08), 0 0 0 0 rgba(241, 196, 15, 0);
+  }
+  50% {
+    border-color: rgba(241, 196, 15, 1);
+    box-shadow: inset 0 0 20px rgba(241, 196, 15, 0.14), 0 0 0 3px rgba(241, 196, 15, 0.16);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .room-zone,
+  .room-zone--high,
+  .room-zone--moderate,
+  .room-zone--low {
+    animation: none;
+  }
 }
 .room-header {
   display: flex;
@@ -114,6 +169,7 @@ function onDrop(e) {
 }
 .room-body {
   flex: 1;
+  min-width: 0;
 }
 .room-empty {
   font-size: 0.75rem;
@@ -125,6 +181,7 @@ function onDrop(e) {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
+  min-width: 0;
 }
 .overflow-pill {
   display: inline-flex;

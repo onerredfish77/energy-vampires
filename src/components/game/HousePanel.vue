@@ -90,6 +90,8 @@ function onDrop({ deviceId, roomId }) {
   flex-direction: column;
   height: 100%;
   padding: 1rem;
+  background-color: rgba(31, 31, 31, 0.90) !important;
+  backdrop-filter: blur(4px);
 }
 .house-title {
   display: flex;
@@ -106,7 +108,7 @@ function onDrop({ deviceId, roomId }) {
   flex-direction: column;
   gap: 0.75rem;
   background:
-    linear-gradient(180deg, rgba(15, 52, 96, 0.15) 0%, rgba(15, 52, 96, 0.05) 100%);
+    linear-gradient(180deg, rgba(42, 42, 42, 0.15) 0%, rgba(42, 42, 42, 0.05) 100%);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
   padding: 1rem;
@@ -120,7 +122,7 @@ function onDrop({ deviceId, roomId }) {
   left: 10%;
   right: 10%;
   height: 16px;
-  background: linear-gradient(180deg, transparent 0%, rgba(15, 52, 96, 0.4) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(42, 42, 42, 0.4) 100%);
   clip-path: polygon(0 100%, 50% 0, 100% 100%);
 }
 .floor {

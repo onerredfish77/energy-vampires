@@ -1,9 +1,5 @@
 <template>
-  <v-footer
-    :elevation="8"
-    color="surface"
-    class="tally-bar"
-  >
+  <footer class="tally-bar">
     <div class="tally-row">
       <!-- Devices -->
       <div class="tally-zone tally-zone--counts">
@@ -55,7 +51,7 @@
         </v-btn>
       </div>
     </div>
-  </v-footer>
+  </footer>
 </template>
 
 <script setup>
@@ -102,10 +98,15 @@ watch(() => tallyYearly.value.cost, v => animate(animYearlyCost, v))
   position: sticky;
   bottom: 0;
   z-index: 5;
+  flex: 0 0 auto;
   border-top: 2px solid rgba(231, 76, 60, 0.3);
-  padding: 0.5rem 1rem !important;
-  min-height: 0 !important;
-  background: linear-gradient(180deg, #16213E 0%, #0F1828 100%) !important;
+  padding: 1rem 1rem;
+  background: #1F1F1F;
+  background-image:
+    radial-gradient(ellipse at 0% 0%, rgba(231, 76, 60, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgba(231, 76, 60, 0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #2A2020 0%, #1F1F1F 45%, #0F0F0F 100%);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4);
 }
 .tally-row {
   width: 100%;

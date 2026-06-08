@@ -98,9 +98,9 @@ The custom Volt Watch theme is defined once in `vuetify.js` and applied globally
 | Role | Token Name | Value |
 |---|---|---|
 | Primary (CTA, accent) | `primary` | `#E74C3C` |
-| Secondary (panels, nav) | `secondary` | `#0F3460` |
-| Background | `background` | `#1A1A2E` |
-| Surface (cards, drawers) | `surface` | `#16213E` |
+| Secondary (panels, nav) | `secondary` | `#2A2A2A` |
+| Background | `background` | `#0D0D0D` |
+| Surface (cards, drawers) | `surface` | `#1F1F1F` |
 | Success (savings, unplugged) | `success` | `#27AE60` |
 | Warning (moderate tier) | `warning` | `#F39C12` |
 | Error (high tier) | `error` | `#E74C3C` |

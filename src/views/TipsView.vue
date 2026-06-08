@@ -237,11 +237,11 @@ const habits = [
 
 <style scoped>
 .tips-view {
-  background: #1A1A2E;
+  background: #0D0D0D;
 }
 .tips-hero {
   padding: 5rem 0 4rem;
-  background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+  background: linear-gradient(135deg, #0D0D0D 0%, #1F1F1F 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .tips-headline {
@@ -262,7 +262,7 @@ const habits = [
   padding: 4rem 0;
 }
 .tips-section--alt {
-  background: rgba(15, 52, 96, 0.15);
+  background: rgba(42, 42, 42, 0.15);
 }
 .section-title {
   font-family: 'Protest Riot', Impact, Georgia, serif;
@@ -301,7 +301,7 @@ const habits = [
 }
 .tips-cta {
   padding: 5rem 0;
-  background: linear-gradient(135deg, rgba(231, 76, 60, 0.08) 0%, rgba(15, 52, 96, 0.2) 100%);
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.08) 0%, rgba(42, 42, 42, 0.2) 100%);
   border-top: 1px solid rgba(231, 76, 60, 0.2);
 }
 .cta-headline {

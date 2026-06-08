@@ -55,7 +55,7 @@ const items = [
 <style scoped>
 .world-stats {
   padding: 5rem 0;
-  background: linear-gradient(180deg, #1A1A2E 0%, #16213E 100%);
+  background: linear-gradient(180deg, #0D0D0D 0%, #1F1F1F 100%);
 }
 .section-header {
   font-family: 'Protest Riot', Impact, Georgia, serif;

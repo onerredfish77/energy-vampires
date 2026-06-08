@@ -53,7 +53,7 @@ const currentCaption = computed(
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #0F1828;
+  background: #080808;
 }
 .vampire-stage {
   position: absolute;
@@ -78,11 +78,11 @@ const currentCaption = computed(
   /* Sit in the right ~30% gutter, above where the sticky tally bar lands. */
   right: 0;
   left: 70%;
-  bottom: 100px;
+  bottom: 146px;
   padding: 1rem 1.25rem;
   text-align: center;
   font-family: 'Protest Riot', Impact, Georgia, serif;
-  background: linear-gradient(180deg, transparent 0%, rgba(15, 24, 40, 0.7) 60%, rgba(15, 24, 40, 0.85) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(8, 8, 8, 0.7) 60%, rgba(8, 8, 8, 0.85) 100%);
   z-index: 2;
   pointer-events: none;
 }
@@ -111,6 +111,7 @@ const currentCaption = computed(
 @media (max-width: 960px) {
   .vampire-caption {
     left: 0;
+    bottom: 0;
   }
 }
 </style>

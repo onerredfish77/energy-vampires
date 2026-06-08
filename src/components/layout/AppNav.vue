@@ -19,8 +19,10 @@
         v-for="link in links"
         :key="link.to"
         :to="link.to"
-        variant="text"
-        class="nav-link"
+        :variant="link.cta ? 'flat' : 'text'"
+        :color="link.cta ? 'primary' : undefined"
+        :class="['nav-link', { 'nav-link--cta': link.cta }]"
+        :prepend-icon="link.icon"
         exact-active-class="nav-link--active"
       >
         {{ link.label }}
@@ -31,9 +33,9 @@
 
 <script setup>
 const links = [
-  { to: '/', label: 'Home' },
-  { to: '/game', label: 'Play the Game' },
-  { to: '/tips', label: 'Ward Off Your Vampire' }
+  { to: '/', label: 'Home', icon: 'mdi-home-outline' },
+  { to: '/tips', label: 'Ward Off Your Vampire', icon: 'mdi-shield-cross' },
+  { to: '/game', label: 'Play the Game', icon: 'mdi-gamepad-variant', cta: true }
 ]
 </script>
 
@@ -66,7 +68,14 @@ const links = [
 .nav-link {
   font-weight: 500;
 }
+.nav-link--cta {
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
 .nav-link--active {
   color: rgb(var(--v-theme-primary)) !important;
+}
+.nav-link--cta.nav-link--active {
+  color: #ECF0F1 !important;
 }
 </style>

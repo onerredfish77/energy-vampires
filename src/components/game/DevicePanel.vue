@@ -1,5 +1,5 @@
 <template>
-  <v-card class="device-panel" color="surface" :elevation="2">
+  <v-card ref="panelRef" class="device-panel" color="surface" :elevation="2">
     <div class="panel-header">
       <v-icon icon="mdi-lightning-bolt" color="primary" />
       <span>Energy Vampires</span>
@@ -45,7 +45,11 @@
     </div>
 
     <v-fade-transition>
-      <div v-if="checkedCount > 0" class="bulk-bar">
+      <div
+        v-if="checkedCount > 0"
+        class="bulk-bar"
+        :style="bulkBarStyle"
+      >
         <span>{{ checkedCount }} selected</span>
         <v-spacer />
         <v-btn
@@ -113,7 +117,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue'
 import { DEVICES, CATEGORIES } from '@/data/devices.js'
 import { useGameStore } from '@/stores/gameStore.js'
 import DeviceCategory from './DeviceCategory.vue'
@@ -124,6 +128,8 @@ const checkedMap = reactive({})
 const dialogOpen = ref(false)
 const resetDialogOpen = ref(false)
 const selectedRoom = ref(null)
+const panelRef = ref(null)
+const bulkBarStyle = ref({ left: '0px', width: '100%' })
 
 const ROOM_OPTIONS = CATEGORIES.map(c => ({ id: c.id, label: `${c.icon}  ${c.label}` }))
 
@@ -161,14 +167,43 @@ function confirmReset() {
   resetGame()
   resetDialogOpen.value = false
 }
+
+let ro = null
+function syncBulkBarGeometry() {
+  const el = panelRef.value?.$el ?? panelRef.value
+  if (!el) return
+  const rect = el.getBoundingClientRect()
+  bulkBarStyle.value = {
+    left: `${rect.left}px`,
+    width: `${rect.width}px`
+  }
+}
+
+onMounted(() => {
+  syncBulkBarGeometry()
+  const el = panelRef.value?.$el ?? panelRef.value
+  if (el) {
+    ro = new ResizeObserver(syncBulkBarGeometry)
+    ro.observe(el)
+  }
+  window.addEventListener('resize', syncBulkBarGeometry)
+  window.addEventListener('scroll', syncBulkBarGeometry, { passive: true })
+})
+
+onBeforeUnmount(() => {
+  ro?.disconnect()
+  window.removeEventListener('resize', syncBulkBarGeometry)
+  window.removeEventListener('scroll', syncBulkBarGeometry)
+})
 </script>
 
 <style scoped>
 .device-panel {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  overflow: hidden;
+  width: 100%;
+  background-color: rgba(31, 31, 31, 0.90) !important;
+  backdrop-filter: blur(4px);
 }
 .panel-header {
   display: flex;
@@ -201,16 +236,19 @@ function confirmReset() {
   white-space: nowrap;
 }
 .panel-scroll {
-  flex: 1;
-  overflow-y: auto;
   padding: 0.5rem;
 }
 .bulk-bar {
+  position: fixed;
+  bottom: 90px;
+  z-index: 2000;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  background: rgba(231, 76, 60, 0.12);
-  border-top: 1px solid rgba(231, 76, 60, 0.3);
+  padding: 0.75rem 1.25rem;
+  background: #2a1418;
+  border-top: 1px solid rgba(231, 76, 60, 0.6);
+  border-bottom: 1px solid rgba(231, 76, 60, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
 </style>

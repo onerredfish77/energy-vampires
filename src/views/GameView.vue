@@ -79,12 +79,11 @@ watch(toastOpen, (open) => {
 .game-view {
   position: relative;
   padding: 0;
-  height: calc(100vh - 64px);
-  background: #1A1A2E;
+  min-height: calc(100vh - 64px);
+  background: #0D0D0D;
   isolation: isolate;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 /* Vampire is pinned to the visible space between the app bar and the
@@ -92,7 +91,7 @@ watch(toastOpen, (open) => {
    edge, so the image never bleeds past the tally. */
 .game-view__vampire {
   position: fixed;
-  top: 64px;
+  top: 57px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -102,11 +101,10 @@ watch(toastOpen, (open) => {
 .game-content {
   position: relative;
   z-index: 1;
-  padding: 1rem 1rem 1rem;
+  padding: 1rem 1rem 6rem;
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-height: 0;
 }
 
 .game-header {
@@ -131,14 +129,16 @@ watch(toastOpen, (open) => {
 .game-grid {
   display: grid;
   grid-template-columns: 25% 45% 30%;
-  grid-template-rows: 1fr;
   gap: 1rem;
   align-items: stretch;
   flex: 1;
-  min-height: 0;
 }
 .game-col {
   min-width: 0;
+  display: flex;
+}
+.game-col > * {
+  flex: 1;
 }
 .game-col--right {
   /* Empty so the vampire on the right side of the image stays visible. */
@@ -147,9 +147,7 @@ watch(toastOpen, (open) => {
 
 @media (max-width: 960px) {
   .game-view {
-    height: auto;
     min-height: calc(100vh - 64px);
-    overflow: visible;
   }
   .game-view__vampire {
     position: relative;
@@ -161,7 +159,6 @@ watch(toastOpen, (open) => {
   }
   .game-grid {
     grid-template-columns: 1fr;
-    min-height: 0;
   }
   .game-col {
     min-height: 320px;

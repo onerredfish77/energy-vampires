@@ -121,8 +121,8 @@ onBeforeUnmount(() => {
   inset: 0;
   background:
     radial-gradient(ellipse at center, rgba(231, 76, 60, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 20% 80%, rgba(15, 52, 96, 0.4) 0%, transparent 50%),
-    #1A1A2E;
+    radial-gradient(ellipse at 20% 80%, rgba(42, 42, 42, 0.4) 0%, transparent 50%),
+    #0D0D0D;
   z-index: 0;
 }
 .stat-window {

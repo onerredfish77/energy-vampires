@@ -19,8 +19,7 @@ import AppFooter from '@/components/layout/AppFooter.vue'
 
 <style>
 .app-main {
-  background-color: #1A1A2E;
-  min-height: 100vh;
+  background-color: #0D0D0D;
 }
 .route-fade-enter-active,
 .route-fade-leave-active {
