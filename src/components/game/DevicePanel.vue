@@ -4,7 +4,20 @@
       <v-icon icon="mdi-lightning-bolt" color="primary" />
       <span>Energy Vampires</span>
       <v-spacer />
-      <span class="panel-sub">{{ DEVICES.length }} devices</span>
+      <span class="panel-sub">Add your devices</span>
+    </div>
+
+    <div class="panel-filter">
+      <v-text-field
+        v-model="searchQuery"
+        prepend-inner-icon="mdi-magnify"
+        placeholder="Filter devices"
+        density="compact"
+        variant="outlined"
+        hide-details
+        clearable
+        single-line
+      />
     </div>
 
     <v-fade-transition>
@@ -33,9 +46,14 @@
     </v-fade-transition>
 
     <div class="panel-scroll">
-      <v-expansion-panels variant="accordion" multiple>
+      <v-expansion-panels
+        v-if="!isFiltering"
+        v-model="openPanels"
+        variant="accordion"
+        multiple
+      >
         <DeviceCategory
-          v-for="cat in CATEGORIES"
+          v-for="cat in visibleCategories"
           :key="cat.id"
           :category="cat"
           :devices="devicesByCategory[cat.id] || []"
@@ -43,6 +61,20 @@
           @check="onCheck"
         />
       </v-expansion-panels>
+
+      <div v-else-if="filteredDevices.length > 0" class="panel-flat-list">
+        <DeviceRow
+          v-for="device in filteredDevices"
+          :key="device.id"
+          :device="device"
+          :checked="!!checkedMap[device.id]"
+          @update:checked="onCheck({ deviceId: device.id, checked: $event })"
+        />
+      </div>
+
+      <div v-else class="panel-empty">
+        No devices match “{{ searchQuery }}”
+      </div>
     </div>
 
     <div class="panel-actions">
@@ -119,6 +151,7 @@ import { ref, reactive, computed } from 'vue'
 import { DEVICES, CATEGORIES } from '@/data/devices.js'
 import { useGameStore } from '@/stores/gameStore.js'
 import DeviceCategory from './DeviceCategory.vue'
+import DeviceRow from './DeviceRow.vue'
 
 const { addDevice, resetGame, populateExampleHouse, state } = useGameStore()
 
@@ -126,8 +159,18 @@ const checkedMap = reactive({})
 const dialogOpen = ref(false)
 const resetDialogOpen = ref(false)
 const selectedRoom = ref(null)
+const searchQuery = ref('')
+const openPanels = ref([])
 
 const ROOM_OPTIONS = CATEGORIES.map(c => ({ id: c.id, label: `${c.icon}  ${c.label}` }))
+
+const isFiltering = computed(() => !!(searchQuery.value && searchQuery.value.trim()))
+
+const filteredDevices = computed(() => {
+  const q = (searchQuery.value || '').trim().toLowerCase()
+  if (!q) return []
+  return DEVICES.filter(d => d.name.toLowerCase().includes(q))
+})
 
 const devicesByCategory = computed(() => {
   const map = {}
@@ -137,6 +180,10 @@ const devicesByCategory = computed(() => {
   }
   return map
 })
+
+const visibleCategories = computed(() =>
+  CATEGORIES.filter(c => (devicesByCategory.value[c.id] || []).length > 0)
+)
 
 const checkedCount = computed(
   () => Object.values(checkedMap).filter(Boolean).length
@@ -186,6 +233,19 @@ function confirmReset() {
   font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
   color: #95A5A6;
+}
+.panel-filter {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.panel-empty {
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: #95A5A6;
+  text-align: center;
+}
+.panel-flat-list {
+  padding: 0.25rem 0.5rem 0.75rem;
 }
 .panel-actions {
   display: flex;
